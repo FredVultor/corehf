@@ -10,3 +10,22 @@ IMPORTANTE
 threads em hartree-fock++
 
 
+
+DICAS PARA COMPILAR AS COISAS
+
+gmp 
+  -> no ubuntu tem apt-get
+
+boost
+  -> depois de baixar
+     ./bootstrap.sh --with-libraries=atomic,date_time,exception,filesystem,iostreams,locale,program_options,regex,signals,system,test,thread,timer,log
+  -> em seguida
+     ./b2 install
+  -> depois
+     sudo ./b2 install
+
+libint
+  -> seguir a risca as instrucoes do INSTALL
+
+
+
