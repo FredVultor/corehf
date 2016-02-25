@@ -1,0 +1,12 @@
+corehf
+
+Programa que faz um calculo hartree fock usando gaussianas semiempiricas
+nas interacoes
+
+
+
+IMPORTANTE
+
+threads em hartree-fock++
+
+
