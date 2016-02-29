@@ -1,0 +1,73 @@
+#!/bin/bash
+
+FILE=escrevendo
+
+if [ -f "$FILE" ]
+then
+  rm $FILE
+fi
+
+echo "Enter libint include path and press ENTER: "
+echo "example: /usr/local/libint/2.1.0-beta2/include" 
+printf '==>  '
+read LIBINT_INCLUDE
+
+echo "Enter libint include library path and press ENTER:  "
+echo "example: /usr/local/libint/2.1.0-beta2/include/libint2" 
+printf '==>  '
+read LIBINT_INC_LIB
+
+echo "Enter eigen path and press ENTER:  "
+echo "example: /home/vultor/PROGRAMAS/eigen-eigen-07105f7124f9" 
+printf '==>  '
+read EIGEN
+
+echo "Enter library path and press ENTER:  "
+echo "example: /usr/local/libint/2.1.0-beta2/lib" 
+printf '==>  '
+read LIBRARY
+# add an / on LIBRARY
+
+echo "Enter basis path and press ENTER:  "
+echo "example: /usr/local/libint/2.1.0-beta2/share/libint/2.1.0-beta2/basis" 
+printf '==>  '
+read BASIS
+
+
+#printf "Surname: %s" "$BASIS" > escrevendo
+
+
+echo '# Makefile' >> $FILE
+printf "CC = g++ \n" >> $FILE
+printf "CFLAGS = -Wall -g -std=c++11 \n" >> $FILE
+printf "INCLUDES = -I%s  -I%s  -I%s \n" "$LIBINT_INCLUDE" "$LIBINT_INC_LIB" "$EIGEN" >> $FILE
+printf "LFLAGS = -L%s/  \n" "$LIBRARY" >> $FILE
+printf "LIBS = -lint2 \n" >> $FILE
+printf "ADDFLAGS = -DSRCDATADIR=\ \"" >> $FILE
+printf "%s" "$BASIS" >> $FILE
+printf "\ \" -fopenmp \n" >> $FILE
+
+printf "SRCS = hartree-fock++.cpp \n" >> $FILE
+
+printf "OBJS = \$(SRCS:.cpp=.o) \n" >> $FILE
+
+printf "MAIN = corehf.exe \n" >> $FILE
+
+printf ".PHONY: depend clean \n" >> $FILE
+printf "all:    \$(MAIN) \n" >> $FILE
+printf "\t@echo  corehf.exe foi compilado com sucesso: \n" >> $FILE
+printf "\$(MAIN): \$(OBJS) \n" >> $FILE
+printf "\t\$(CC) \$(CFLAGS) \$(INCLUDES) -o \$(MAIN) \$(OBJS) \$(LFLAGS) \$(LIBS) \$(ADDFLAGS) \n" >> $FILE
+printf ".cpp.o: \n" >> $FILE
+printf "\t\$(CC) \$(CFLAGS) \$(INCLUDES) -c $<  -o \$@ \$(ADDFLAGS) \n" >> $FILE
+printf "clean:: \n" >> $FILE
+printf "\t\$(RM) *.o *~ \$(MAIN) \n" >> $FILE
+printf "depend: \$(SRCS) \n" >> $FILE
+printf "\tmakedepend \$(INCLUDES) \$^ \n" >> $FILE
+printf "\n \n # DO NOT DELETE THIS LINE -- make depend needs it \n" >> $FILE
+
+
+
+
+
+
