@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE=escrevendo
+FILE=Makefile
 
 if [ -f "$FILE" ]
 then
@@ -43,9 +43,11 @@ printf "CFLAGS = -Wall -g -std=c++11 \n" >> $FILE
 printf "INCLUDES = -I%s  -I%s  -I%s \n" "$LIBINT_INCLUDE" "$LIBINT_INC_LIB" "$EIGEN" >> $FILE
 printf "LFLAGS = -L%s/  \n" "$LIBRARY" >> $FILE
 printf "LIBS = -lint2 \n" >> $FILE
-printf "ADDFLAGS = -DSRCDATADIR=\ \"" >> $FILE
+printf "ADDFLAGS = -DSRCDATADIR=\\" >> $FILE
+printf "\"" >> $FILE
 printf "%s" "$BASIS" >> $FILE
-printf "\ \" -fopenmp \n" >> $FILE
+printf "\\" >> $FILE
+printf "\" -fopenmp \n" >> $FILE
 
 printf "SRCS = hartree-fock++.cpp \n" >> $FILE
 
